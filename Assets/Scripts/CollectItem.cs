@@ -2,22 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KillEnemy : MonoBehaviour
+public class CollectItem : MonoBehaviour
 {
     public GameObject promptWindow;
-    public GameObject killPromptWindow;
+    public GameObject gatherPromptWindow;
     public Player player;
 
     private bool keyPressed = false;
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player" && player.quest.goal.goalType == GoalType.Kill)
+        if (other.tag == "Player" && player.quest.goal.goalType == GoalType.Gather)
         {
             promptWindow.SetActive(true);
-            if(player.quest.goal.goalType == GoalType.Kill)
+            if (player.quest.goal.goalType == GoalType.Gather)
             {
-                killPromptWindow.SetActive(true);
+                gatherPromptWindow.SetActive(true);
             }
         }
     }
@@ -26,13 +26,13 @@ public class KillEnemy : MonoBehaviour
     {
         if (other.tag == "Player" & !keyPressed)
         {
-            if (Input.GetKeyDown(KeyCode.E) && player.quest.goal.goalType == GoalType.Kill)
+            if (Input.GetKeyDown(KeyCode.E) && player.quest.goal.goalType == GoalType.Gather)
             {
-                player.killEnemy();
+                player.gatherItem();
                 keyPressed = true;
                 Destroy(transform.parent.gameObject);
                 promptWindow.SetActive(false);
-                killPromptWindow.SetActive(false);
+                gatherPromptWindow.SetActive(false);
             }
         }
     }
@@ -42,7 +42,7 @@ public class KillEnemy : MonoBehaviour
         if (other.tag == "Player")
         {
             promptWindow.SetActive(false);
-            killPromptWindow.SetActive(false);
+            gatherPromptWindow.SetActive(false);
         }
     }
 }

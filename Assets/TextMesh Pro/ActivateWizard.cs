@@ -2,22 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KillEnemy : MonoBehaviour
+public class ActivateWizard : MonoBehaviour
 {
     public GameObject promptWindow;
-    public GameObject killPromptWindow;
+    public GameObject activatePromptWindow;
+    public GameObject wizardDialog;
     public Player player;
 
     private bool keyPressed = false;
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player" && player.quest.goal.goalType == GoalType.Kill)
+        if (other.tag == "Player" && player.quest.goal.goalType == GoalType.Activate)
         {
             promptWindow.SetActive(true);
-            if(player.quest.goal.goalType == GoalType.Kill)
+            if (player.quest.goal.goalType == GoalType.Activate)
             {
-                killPromptWindow.SetActive(true);
+                activatePromptWindow.SetActive(true);
             }
         }
     }
@@ -26,13 +27,15 @@ public class KillEnemy : MonoBehaviour
     {
         if (other.tag == "Player" & !keyPressed)
         {
-            if (Input.GetKeyDown(KeyCode.E) && player.quest.goal.goalType == GoalType.Kill)
+            if (Input.GetKeyDown(KeyCode.E) && player.quest.goal.goalType == GoalType.Activate)
             {
-                player.killEnemy();
+                player.activateWizard();
                 keyPressed = true;
-                Destroy(transform.parent.gameObject);
+
+                wizardDialog.SetActive(true);
+
                 promptWindow.SetActive(false);
-                killPromptWindow.SetActive(false);
+                activatePromptWindow.SetActive(false);
             }
         }
     }
@@ -42,7 +45,8 @@ public class KillEnemy : MonoBehaviour
         if (other.tag == "Player")
         {
             promptWindow.SetActive(false);
-            killPromptWindow.SetActive(false);
+            activatePromptWindow.SetActive(false);
+            wizardDialog.SetActive(false);
         }
     }
 }

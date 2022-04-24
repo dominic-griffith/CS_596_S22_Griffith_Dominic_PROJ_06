@@ -7,6 +7,8 @@ public class Quest
 {
 
     public bool isActive;
+    public bool isCompleted = false;
+    public bool isCanceled = false;
 
     public string title;
     public string description;
@@ -17,5 +19,6 @@ public class Quest
     public void Complete()
     {
         isActive = false;
+        isCompleted = true;
     }
 }

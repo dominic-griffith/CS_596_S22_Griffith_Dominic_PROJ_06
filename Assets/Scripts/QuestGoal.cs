@@ -38,5 +38,6 @@ public enum GoalType
 {
     Kill,
     Gather,
-    Activate
+    Activate,
+    None
 }

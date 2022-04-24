@@ -34,5 +34,32 @@ public class Player : MonoBehaviour
             }
         }
     }
-    
+
+    public void gatherItem()
+    {
+        if(quest.isActive)
+        {
+            quest.goal.ItemCollected();
+            if (quest.goal.isReached())
+            {
+                gold += quest.goldReward;
+                quest.Complete();
+            }
+        }
+    }
+
+    public void activateWizard()
+    {
+        if (quest.isActive)
+        {
+            quest.goal.ObjectActivated();
+            if (quest.goal.isReached())
+            {
+                gold += quest.goldReward;
+                quest.Complete();
+            }
+        }
+    }
+
+
 }
